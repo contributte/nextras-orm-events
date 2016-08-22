@@ -1,6 +1,6 @@
 <?php
 
-namespace Minetro\Tests\Mocks;
+namespace Minetro\Tests\Mocks\Foo;
 
 use Minetro\Nextras\Events\Listeners\BeforePersistListener;
 use Nextras\Orm\Entity\IEntity;

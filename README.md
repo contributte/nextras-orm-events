@@ -25,7 +25,7 @@ composer require minetro/nextras-orm-events
 
 ### Entity
 
-Just add annotation `@<>` to your entity.
+Just add annotation `@<Before/Update>` to your entity.
 
 ```php
 /**
@@ -37,6 +37,7 @@ Just add annotation `@<>` to your entity.
  * @AfterPersist(My/AfterPersistListener)
  * @AfterRemove(My/AfterRemoveListener)
  * @AfterUpdate(My/AfterUpdateListener)
+ 
  * @Lifecycle(My/LifecycleListener)
  */
 class Foo extends Entity

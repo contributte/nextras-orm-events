@@ -1,11 +1,11 @@
 <?php
 
-namespace Minetro\Tests\Mocks\Foo;
+namespace Minetro\Tests\Mocks\InvalidFoo\Foo;
 
 use Nette\Caching\Cache;
 use Nextras\Orm\Mapper\Memory\ArrayMapper;
 
-final class FooMapper extends ArrayMapper
+final class InvalidFooMapper extends ArrayMapper
 {
 
     /** @var mixed */

@@ -1,6 +1,6 @@
 <?php
 
-namespace Minetro\Tests\Mocks\Foo;
+namespace Minetro\Tests\Mocks\Foo\Foo;
 
 use Nextras\Orm\Repository\Repository;
 
