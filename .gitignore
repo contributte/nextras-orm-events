@@ -1,0 +1,9 @@
+# IDEA
+/.idea
+
+# Composer
+/composer.lock
+/vendor
+
+# Tests
+/tests/tmp

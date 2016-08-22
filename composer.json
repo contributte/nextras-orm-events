@@ -1,0 +1,33 @@
+{
+  "name": "minetro/nextras-orm-events",
+  "description": "Better events support for Nextras ORM",
+  "type": "library",
+  "license": ["BSD-3-Clause"],
+  "homepage": "https://github.com/minetro/nextras-orm-events",
+  "authors": [
+    {
+      "name": "Milan Felix Sulc",
+      "homepage": "http://jfx.cz"
+    }
+  ],
+  "require": {
+    "php": ">= 5.6",
+    "nette/di": "^2.4.2",
+    "nette/reflection": "^2.4.0",
+    "nextras/orm": "^2.0.2"
+  },
+  "require-dev": {
+    "nette/tester": "~1.7.0",
+    "nette/caching": "^2.5.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Minetro\\Nextras\\Events\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Minetro\\Tests\\": "tests/engine"
+    }
+  }
+}
