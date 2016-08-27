@@ -98,28 +98,30 @@ class Foo extends Entity
 ```
 
 ```php
-    /**
-	 * @return FooRepository
-	 */
-	public function createServiceOrm__repositories__foo()
-	{
-		$service = new FooRepository(
-		    $this->getService('orm.mappers.foo'),
-			$this->getService('orm.dependencyProvider')
-        );
-		$service->setModel($this->getService('orm.model'));
-	
-        // ===== attaching events =====
-			
-		$service->onBeforeInsert[] = [
-			$this->getService('FooBeforeInsertListener'),
-			'onBeforeInsert',
-		];
+// Generated container.. 
+
+/**
+ * @return FooRepository
+ */
+public function createServiceOrm__repositories__foo()
+{
+    $service = new FooRepository(
+        $this->getService('orm.mappers.foo'),
+        $this->getService('orm.dependencyProvider')
+    );
+    $service->setModel($this->getService('orm.model'));
+
+    // ===== attaching events (provided by extension =====
         
-        // ===== attaching events =====
-		
-		return $service;
-    }
+    $service->onBeforeInsert[] = [
+        $this->getService('FooBeforeInsertListener'),
+        'onBeforeInsert',
+    ];
+    
+    // ===== attaching events ============================
+    
+    return $service;
+}
 ```
 
 That's all. Super ultra simple.
