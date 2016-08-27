@@ -23,6 +23,18 @@ composer require minetro/nextras-orm-events
 
 ## Usage
 
+### Config
+
+```yaml
+extensions:
+    ormEvents: Minetro\Nextras\Events\DI\NextrasEventsExtension
+```
+
+```yaml
+services:
+    - My\BeforePersistListener
+```
+
 ### Entity
 
 Just add annotation `@<Before/Update>` to your entity.
@@ -69,11 +81,45 @@ final class BeforePersistListener implements BeforePersistListener
 }
 ```
 
-### Config
+### Real example
 
 ```yaml
-services:
-    - My\BeforePersistListener
+service:
+    - FooBeforeInsertListener
+```
+
+```php
+/**
+ * @BeforeInsert(FooBeforeInsertListener)
+ */
+class Foo extends Entity
+{
+}
+```
+
+```php
+    /**
+	 * @return FooRepository
+	 */
+	public function createServiceOrm__repositories__foo()
+	{
+		$service = new FooRepository(
+		    $this->getService('orm.mappers.foo'),
+			$this->getService('orm.dependencyProvider')
+        );
+		$service->setModel($this->getService('orm.model'));
+	
+        // ===== attaching events =====
+			
+		$service->onBeforeInsert[] = [
+			$this->getService('FooBeforeInsertListener'),
+			'onBeforeInsert',
+		];
+        
+        // ===== attaching events =====
+		
+		return $service;
+    }
 ```
 
 That's all. Super ultra simple.
