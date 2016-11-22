@@ -52,7 +52,7 @@ final class EventsTestCase extends TestCase
         ', 'neon'));
 
             $callback($compiler);
-        }, microtime() . mt_rand(1, 1000));
+        }, md5(microtime() . mt_rand(1, 1000)));
 
         return new $class;
     }
@@ -103,11 +103,11 @@ final class EventsTestCase extends TestCase
                 ]);
 
                 $compiler->loadConfig(FileMock::create('
-            services:
-                cache: Nette\Caching\Storages\DevNullStorage
-                
-                - Minetro\Tests\Mocks\InvalidFoo\BadListener
-        ', 'neon'));
+                    services:
+                        cache: Nette\Caching\Storages\DevNullStorage
+                        
+                        - Minetro\Tests\Mocks\InvalidFoo\BadListener
+                ', 'neon'));
             });
         },
             ServiceCreationException::class,
