@@ -7,18 +7,18 @@
   "authors": [
     {
       "name": "Milan Felix Sulc",
-      "homepage": "http://jfx.cz"
+      "homepage": "https://jfx.cz"
     }
   ],
   "require": {
     "php": ">= 5.6",
-    "nette/di": "^2.4.2",
+    "nette/di": "^2.4.0",
     "nette/reflection": "^2.4.0",
-    "nextras/orm": "^2.0.2"
+    "nextras/orm": ">=2.0.0,<2.3.0"
   },
   "require-dev": {
-    "nette/tester": "~1.7.0",
-    "nette/caching": "^2.5.1"
+    "nette/tester": "~1.7.1",
+    "nette/caching": "^2.5.2"
   },
   "autoload": {
     "psr-4": {
