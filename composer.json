@@ -14,7 +14,7 @@
     "php": ">= 5.6",
     "nette/di": "^2.4.2",
     "nette/reflection": "^2.4.0",
-    "nextras/orm": ">=2.0.0,<2.3.0"
+    "nextras/orm": ">=2.0.0,<2.3.0 || >=3.0.0"
   },
   "require-dev": {
     "nette/tester": "~1.7.1",
