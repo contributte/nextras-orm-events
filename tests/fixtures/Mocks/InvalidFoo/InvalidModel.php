@@ -1,9 +1,9 @@
 <?php
 
-namespace Minetro\Tests\Mocks\InvalidFoo;
+namespace Tests\Fixtures\Mocks\InvalidFoo;
 
-use Minetro\Tests\Mocks\InvalidFoo\Foo\InvalidFooRepository;
 use Nextras\Orm\Model\Model as NextrasModel;
+use Tests\Fixtures\Mocks\InvalidFoo\Foo\InvalidFooRepository;
 
 /**
  * @property-read InvalidFooRepository $foo

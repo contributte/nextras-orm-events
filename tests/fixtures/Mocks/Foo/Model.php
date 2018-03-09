@@ -1,9 +1,9 @@
 <?php
 
-namespace Minetro\Tests\Mocks\Foo;
+namespace Tests\Fixtures\Mocks\Foo;
 
-use Minetro\Tests\Mocks\Foo\Foo\FooRepository;
 use Nextras\Orm\Model\Model as NextrasModel;
+use Tests\Fixtures\Mocks\Foo\Foo\FooRepository;
 
 /**
  * @property-read FooRepository $foo

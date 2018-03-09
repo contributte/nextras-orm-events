@@ -1,16 +1,16 @@
 <?php
 
-namespace Minetro\Nextras\Events\Listeners;
+namespace Contributte\Nextras\Orm\Events\Listeners;
 
 interface LifecycleListener extends
-    BeforeInsertListener,
-    BeforePersistListener,
-    BeforeRemoveListener,
-    BeforeUpdateListener,
-    AfterInsertListener,
-    AfterPersistListener,
-    AfterRemoveListener,
-    AfterUpdateListener
+	BeforeInsertListener,
+	BeforePersistListener,
+	BeforeRemoveListener,
+	BeforeUpdateListener,
+	AfterInsertListener,
+	AfterPersistListener,
+	AfterRemoveListener,
+	AfterUpdateListener
 {
 
 }

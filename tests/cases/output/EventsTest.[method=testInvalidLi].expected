@@ -1,0 +1,1 @@
+Object 'Tests\Fixtures\Mocks\InvalidFoo\BadListener' should implement 'Minetro\Nextras\Events\Listeners\BeforePersistListener'

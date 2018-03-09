@@ -1,6 +1,6 @@
 <?php
 
-namespace Minetro\Tests\Mocks\Foo;
+namespace Tests\Fixtures\Mocks\Foo;
 
 final class BadListener
 {

@@ -1,24 +1,25 @@
-# Nextras\ORM Events
+# Nextras ORM Events
 
-Doctrine-like events for Nextras\ORM Entity.
+Doctrine-like events for Nextras ORM entity lifecycle.
 
 -----
 
-[![Build Status](https://img.shields.io/travis/minetro/nextras-orm-events.svg?style=flat-square)](https://travis-ci.org/minetro/nextras-orm-events)
-[![Code coverage](https://img.shields.io/coveralls/minetro/nextras-orm-events.svg?style=flat-square)](https://coveralls.io/r/minetro/nextras-orm-events)
-[![Downloads this Month](https://img.shields.io/packagist/dm/minetro/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/minetro/nextras-orm-events)
-[![Downloads total](https://img.shields.io/packagist/dt/minetro/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/minetro/nextras-orm-events)
-[![Latest stable](https://img.shields.io/packagist/v/minetro/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/minetro/nextras-orm-events)
-[![HHVM Status](https://img.shields.io/hhvm/minetro/nextras-orm-events.svg?style=flat-square)](http://hhvm.h4cc.de/package/minetro/nextras-orm-events)
+[![Build Status](https://img.shields.io/travis/contributte/nextras-orm-events.svg?style=flat-square)](https://travis-ci.org/contributte/nextras-orm-events)
+[![Code coverage](https://img.shields.io/coveralls/contributte/nextras-orm-events.svg?style=flat-square)](https://coveralls.io/r/contributte/nextras-orm-events)
+[![Licence](https://img.shields.io/packagist/l/contributte/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-events)
 
+[![Downloads this Month](https://img.shields.io/packagist/dm/contributte/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-events)
+[![Downloads total](https://img.shields.io/packagist/dt/contributte/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-events)
+[![Latest stable](https://img.shields.io/packagist/v/contributte/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-events)
+ 
 ## Discussion / Help
-
-[![Join the chat](https://img.shields.io/gitter/room/minetro/nette.svg?style=flat-square)](https://gitter.im/minetro/nette?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+ 
+[![Join the chat](https://img.shields.io/gitter/room/contributte/contributte.svg?style=flat-square)](http://bit.ly/ctteg)
 
 ## Install
 
 ```sh
-composer require minetro/nextras-orm-events
+composer require contributte/nextras-orm-events
 ```
 
 ## Usage
@@ -27,7 +28,7 @@ composer require minetro/nextras-orm-events
 
 ```yaml
 extensions:
-    ormEvents: Minetro\Nextras\Events\DI\NextrasEventsExtension
+    orm.events: Contributte\Nextras\Orm\Events\DI\NextrasOrmEventsExtension
 ```
 
 ```yaml
@@ -62,9 +63,10 @@ class Foo extends Entity
 
 ```php
 
-namespace My;
+namespace App\Model;
 
-use Minetro\Nextras\Events\Listeners\BeforePersistListener;
+use Contributte\Nextras\Orm\Events\Listeners\BeforePersistListener;
+use Nextras\Orm\Entity\IEntity;
 
 final class BeforePersistListener implements BeforePersistListener
 {
@@ -85,12 +87,12 @@ final class BeforePersistListener implements BeforePersistListener
 
 ```yaml
 service:
-    - FooBeforeInsertListener
+    - App\Model\FooBeforeInsertListener
 ```
 
 ```php
 /**
- * @BeforeInsert(FooBeforeInsertListener)
+ * @BeforeInsert(App\Model\FooBeforeInsertListener)
  */
 class Foo extends Entity
 {
@@ -114,7 +116,7 @@ public function createServiceOrm__repositories__foo()
     // ===== attaching events (provided by extension =====
         
     $service->onBeforeInsert[] = [
-        $this->getService('FooBeforeInsertListener'),
+        $this->getService('App\Model\FooBeforeInsertListener'),
         'onBeforeInsert',
     ];
     
