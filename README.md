@@ -22,6 +22,14 @@ Doctrine-like events for Nextras ORM entity lifecycle.
 composer require contributte/nextras-orm-events
 ```
 
+## Versions
+
+| State       | Version | Branch   | PHP      | |
+|-------------|---------|----------|----------|-|
+| development | `^0.4`  | `master` | `>= 5.6` ||
+| stable      | `^0.3`  | `master` | `>= 5.6` ||
+| stable      | `^0.2`  | `master` | `>= 5.6` |(old namespace)|
+
 ## Usage
 
 ### Config
@@ -33,7 +41,7 @@ extensions:
 
 ```yaml
 services:
-    - My\BeforePersistListener
+    - App\Model\BeforePersistListener
 ```
 
 ### Entity
@@ -42,16 +50,16 @@ Just add annotation `@<Before/Update>` to your entity.
 
 ```php
 /**
- * @BeforeInsert(My/BeforeInsertListener)
- * @BeforePersist(My/BeforePersistListener)
- * @BeforeRemove(My/BeforeRemoveListener)
- * @BeforeUpdate(My/BeforeUpdateListener)
- * @AfterInsert(My/AfterInsertListener)
- * @AfterPersist(My/AfterPersistListener)
- * @AfterRemove(My/AfterRemoveListener)
- * @AfterUpdate(My/AfterUpdateListener)
+ * @BeforeInsert(App\Model\BeforeInsertListener)
+ * @BeforePersist(App\Model\BeforePersistListener)
+ * @BeforeRemove(App\Model\BeforeRemoveListener)
+ * @BeforeUpdate(App\Model\BeforeUpdateListener)
+ * @AfterInsert(App\Model\AfterInsertListener)
+ * @AfterPersist(App\Model\AfterPersistListener)
+ * @AfterRemove(App\Model\AfterRemoveListener)
+ * @AfterUpdate(App\Model\AfterUpdateListener)
  
- * @Lifecycle(My/LifecycleListener)
+ * @Lifecycle(App\Model\LifecycleListener)
  */
 class Foo extends Entity
 {
@@ -128,6 +136,22 @@ public function createServiceOrm__repositories__foo()
 
 That's all. Super ultra simple.
 
------
+## Maintainers
 
-Thanks for testing, reporting and contributing.
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/f3l1x">
+            <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=150">
+        </a>
+        </br>
+        <a href="https://github.com/f3l1x">Milan Felix Šulc</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
+
+-------
+
+Thank you for testing, reporting and contributing.
