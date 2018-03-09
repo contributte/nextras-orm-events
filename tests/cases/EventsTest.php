@@ -71,6 +71,26 @@ final class EventsTest extends TestCase
 	/**
 	 * @return void
 	 */
+	public function testListenerLazyLoading()
+	{
+		$container = $this->createSimpleContainer();
+		$repository = $container->getByType(FooRepository::class);
+
+		Assert::falsey($container->isCreated($container->findByType(FooListener::class)[0]));
+		Assert::falsey($container->isCreated($container->findByType(FooLifecycleListener::class)[0]));
+
+		$entity = new Foo();
+		$entity->bar = 'foobar';
+
+		$repository->persistAndFlush($entity);
+
+		Assert::truthy($container->isCreated($container->findByType(FooListener::class)[0]));
+		Assert::truthy($container->isCreated($container->findByType(FooLifecycleListener::class)[0]));
+	}
+
+	/**
+	 * @return void
+	 */
 	public function testEventsHierarchy()
 	{
 		$container = $this->createSimpleContainer();

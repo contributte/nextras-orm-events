@@ -160,11 +160,11 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 				throw new ServiceCreationException(sprintf("Object '%s' should implement '%s'", $listener, $interface));
 			}
 
-			$repositoryDef->addSetup('$service->?[] = ?', [
+			$repositoryDef->addSetup('$service->?[] = function() {call_user_func_array([?, ?], func_get_args());}', [
 				$event,
-				[$listenerDef, $event],
+				$listenerDef,
+				$event,
 			]);
 		}
 	}
-
 }
