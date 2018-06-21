@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Events\Listeners;
 
@@ -7,10 +7,6 @@ use Nextras\Orm\Entity\IEntity;
 interface BeforeUpdateListener
 {
 
-	/**
-	 * @param IEntity $entity
-	 * @return void
-	 */
-	public function onBeforeUpdate(IEntity $entity);
+	public function onBeforeUpdate(IEntity $entity): void;
 
 }

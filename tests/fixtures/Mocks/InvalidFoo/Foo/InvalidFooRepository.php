@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Tests\Fixtures\Mocks\InvalidFoo\Foo;
 
@@ -10,7 +10,7 @@ final class InvalidFooRepository extends Repository
 	/**
 	 * @return string[]
 	 */
-	public static function getEntityClassNames()
+	public static function getEntityClassNames(): array
 	{
 		return [InvalidFoo::class];
 	}

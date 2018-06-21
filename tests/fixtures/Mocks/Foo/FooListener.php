@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Tests\Fixtures\Mocks\Foo;
 
@@ -8,19 +8,15 @@ use Nextras\Orm\Entity\IEntity;
 final class FooListener implements BeforePersistListener
 {
 
-	/** @var array */
+	/** @var callable[] */
 	public $onCall = [];
 
-	/** @var string */
+	/** @var string[] */
 	public $onCallHistory = [];
 
-	/**
-	 * @param IEntity $entity
-	 * @return void
-	 */
-	public function onBeforePersist(IEntity $entity)
+	public function onBeforePersist(IEntity $entity): void
 	{
-		$method = str_replace(__CLASS__ . '::', NULL, __METHOD__);
+		$method = str_replace(__CLASS__ . '::', null, __METHOD__);
 		foreach ($this->onCall as $cb) {
 			$cb($method, $entity);
 		}

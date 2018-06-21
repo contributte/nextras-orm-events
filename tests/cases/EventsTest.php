@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Tests\Cases;
 
@@ -27,14 +27,10 @@ require_once __DIR__ . '/../bootstrap.php';
 final class EventsTest extends TestCase
 {
 
-	/**
-	 * @param callable $callback
-	 * @return Container
-	 */
-	protected function createContainer(callable $callback)
+	protected function createContainer(callable $callback): Container
 	{
-		$loader = new ContainerLoader(TEMP_DIR, TRUE);
-		$class = $loader->load(function (Compiler $compiler) use ($callback) {
+		$loader = new ContainerLoader(TEMP_DIR, true);
+		$class = $loader->load(function (Compiler $compiler) use ($callback): void {
 			$compiler->addExtension('orm', new OrmExtension());
 			$compiler->addExtension('dbal', new DbalExtension());
 			$compiler->addExtension('orm.events', new NextrasOrmEventsExtension());
@@ -56,22 +52,16 @@ final class EventsTest extends TestCase
 			$callback($compiler);
 		}, md5(microtime() . mt_rand(1, 1000)));
 
-		return new $class;
+		return new $class();
 	}
 
-	/**
-	 * @return Container
-	 */
-	protected function createSimpleContainer()
+	protected function createSimpleContainer(): Container
 	{
-		return $this->createContainer(function () {
+		return $this->createContainer(function (): void {
 		});
 	}
 
-	/**
-	 * @return void
-	 */
-	public function testListenerLazyLoading()
+	public function testListenerLazyLoading(): void
 	{
 		$container = $this->createSimpleContainer();
 		$repository = $container->getByType(FooRepository::class);
@@ -88,10 +78,7 @@ final class EventsTest extends TestCase
 		Assert::truthy($container->isCreated($container->findByType(FooLifecycleListener::class)[0]));
 	}
 
-	/**
-	 * @return void
-	 */
-	public function testEventsHierarchy()
+	public function testEventsHierarchy(): void
 	{
 		$container = $this->createSimpleContainer();
 
@@ -117,14 +104,11 @@ final class EventsTest extends TestCase
 		Assert::equal(['onBeforePersist'], $listener->onCallHistory);
 	}
 
-	/**
-	 * @return void
-	 */
-	public function testInvalidListener()
+	public function testInvalidListener(): void
 	{
 		Assert::throws(
-			function () {
-				$this->createContainer(function (Compiler $compiler) {
+			function (): void {
+				$this->createContainer(function (Compiler $compiler): void {
 					$compiler->addConfig([
 						'orm' => [
 							'model' => InvalidModel::class,

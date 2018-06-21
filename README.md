@@ -11,9 +11,9 @@ Doctrine-like events for Nextras ORM entity lifecycle.
 [![Downloads this Month](https://img.shields.io/packagist/dm/contributte/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-events)
 [![Downloads total](https://img.shields.io/packagist/dt/contributte/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-events)
 [![Latest stable](https://img.shields.io/packagist/v/contributte/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-events)
- 
+
 ## Discussion / Help
- 
+
 [![Join the chat](https://img.shields.io/gitter/room/contributte/contributte.svg?style=flat-square)](http://bit.ly/ctteg)
 
 ## Install
@@ -26,115 +26,16 @@ composer require contributte/nextras-orm-events
 
 | State       | Version | Branch   | PHP      | |
 |-------------|---------|----------|----------|-|
-| development | `^0.4`  | `master` | `>= 5.6` ||
+| development | `^0.5`  | `master` | `>= 7.1` ||
+| stable      | `^0.4`  | `master` | `>= 7.1` ||
 | stable      | `^0.3`  | `master` | `>= 5.6` ||
 | stable      | `^0.2`  | `master` | `>= 5.6` |(old namespace)|
 
-## Usage
-
-### Config
-
-```yaml
-extensions:
-    orm.events: Contributte\Nextras\Orm\Events\DI\NextrasOrmEventsExtension
-```
-
-```yaml
-services:
-    - App\Model\BeforePersistListener
-```
-
-### Entity
-
-Just add annotation `@<Before/Update>` to your entity.
-
-```php
-/**
- * @BeforeInsert(App\Model\BeforeInsertListener)
- * @BeforePersist(App\Model\BeforePersistListener)
- * @BeforeRemove(App\Model\BeforeRemoveListener)
- * @BeforeUpdate(App\Model\BeforeUpdateListener)
- * @AfterInsert(App\Model\AfterInsertListener)
- * @AfterPersist(App\Model\AfterPersistListener)
- * @AfterRemove(App\Model\AfterRemoveListener)
- * @AfterUpdate(App\Model\AfterUpdateListener)
- 
- * @Lifecycle(App\Model\LifecycleListener)
- */
-class Foo extends Entity
-{
-}
-
-```
-
-### Service
-
-```php
-
-namespace App\Model;
-
-use Contributte\Nextras\Orm\Events\Listeners\BeforePersistListener;
-use Nextras\Orm\Entity\IEntity;
-
-final class BeforePersistListener implements BeforePersistListener
-{
-
-    /**
-     * @param IEntity $entity
-     * @return void
-     */
-    public function onBeforePersist(IEntity $entity)
-    {
-        // ...
-    }
-
-}
-```
-
-### Real example
-
-```yaml
-service:
-    - App\Model\FooBeforeInsertListener
-```
-
-```php
-/**
- * @BeforeInsert(App\Model\FooBeforeInsertListener)
- */
-class Foo extends Entity
-{
-}
-```
-
-```php
-// Generated container.. 
-
-/**
- * @return FooRepository
- */
-public function createServiceOrm__repositories__foo()
-{
-    $service = new FooRepository(
-        $this->getService('orm.mappers.foo'),
-        $this->getService('orm.dependencyProvider')
-    );
-    $service->setModel($this->getService('orm.model'));
-
-    // ===== attaching events (provided by extension =====
-        
-    $service->onBeforeInsert[] = [
-        $this->getService('App\Model\FooBeforeInsertListener'),
-        'onBeforeInsert',
-    ];
-    
-    // ===== attaching events ============================
-    
-    return $service;
-}
-```
-
-That's all. Super ultra simple.
+## Overview
+- [Config](https://github.com/contributte/nextras-orm-events/blob/master/.docs/README.md#config)
+- [Entity](https://github.com/contributte/nextras-orm-events/blob/master/.docs/README.md#entity)
+- [Service](https://github.com/contributte/nextras-orm-events/blob/master/.docs/README.md#service)
+- [Real example](https://github.com/contributte/nextras-orm-events/blob/master/.docs/README.md#real-example)
 
 ## Maintainers
 
@@ -148,8 +49,15 @@ That's all. Super ultra simple.
         </br>
         <a href="https://github.com/f3l1x">Milan Felix Šulc</a>
       </td>
+      <td align="center">
+        <a href="https://github.com/mabar">
+            <img width="150" height="150" src="https://avatars0.githubusercontent.com/u/20974277?s=400&v=4">
+        </a>
+        </br>
+        <a href="https://github.com/mabar">Marek Bartoš</a>
+      </td>
     </tr>
-  </tbody>
+  <tbody>
 </table>
 
 -------
