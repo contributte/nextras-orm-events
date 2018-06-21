@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Nextras\Orm\Events\DI;
 
@@ -13,12 +13,13 @@ use Contributte\Nextras\Orm\Events\Listeners\BeforeUpdateListener;
 use Nette\DI\CompilerExtension;
 use Nette\DI\ServiceCreationException;
 use Nette\Reflection\ClassType;
+use Nette\Reflection\IAnnotation;
 use Nextras\Orm\Repository\IRepository;
 
 final class NextrasOrmEventsExtension extends CompilerExtension
 {
 
-	/** @var array */
+	/** @var string[][] */
 	private static $annotations = [
 		'Lifecycle' => [
 			'onBeforeInsert' => BeforeInsertListener::class,
@@ -58,10 +59,8 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 
 	/**
 	 * Decorate services
-	 *
-	 * @return void
 	 */
-	public function beforeCompile()
+	public function beforeCompile(): void
 	{
 		// Find registered IRepositories and parse their entities
 		$mapping = $this->loadEntityMapping();
@@ -73,9 +72,9 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 	/**
 	 * Load entity mapping
 	 *
-	 * @return array
+	 * @return string[]
 	 */
-	private function loadEntityMapping()
+	private function loadEntityMapping(): array
 	{
 		$mapping = [];
 
@@ -83,6 +82,7 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 		$repositories = $builder->findByType(IRepository::class);
 
 		foreach ($repositories as $repository) {
+			/** @var IRepository $repositoryClass */
 			$repositoryClass = $repository->getEntity();
 
 			// Skip invalid repositoryClass name
@@ -103,10 +103,9 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 	}
 
 	/**
-	 * @param array $mapping
-	 * @return void
+	 * @param string[] $mapping
 	 */
-	private function loadListeners(array $mapping)
+	private function loadListeners(array $mapping): void
 	{
 		foreach ($mapping as $entity => $repository) {
 			// Test invalid class name
@@ -122,30 +121,29 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 
 			// Try all annotations
 			foreach (self::$annotations as $annotation => $events) {
-				if (($listener = $rf->getAnnotation($annotation))) {
-					$this->loadListenerByAnnotation($events, $repository, $listener);
+				/** @var IAnnotation|null $listener */
+				$listener = $rf->getAnnotation($annotation);
+				if ($listener !== null) {
+					$this->loadListenerByAnnotation($events, $repository, (string) $listener);
 				}
 			}
 		}
 	}
 
 	/**
-	 * @param string $events
-	 * @param string $repository
-	 * @param string $listener
-	 * @return void
+	 * @param string[] $events
 	 */
-	private function loadListenerByAnnotation($events, $repository, $listener)
+	private function loadListenerByAnnotation(array $events, string $repository, string $listener): void
 	{
 		$builder = $this->getContainerBuilder();
 
 		// Skip if repository is not registered in DIC
-		if (($rsn = $builder->getByType($repository)) === NULL) {
+		if (($rsn = $builder->getByType($repository)) === null) {
 			throw new ServiceCreationException(sprintf("Repository service '%s' not found", $repository));
 		}
 
 		// Skip if listener is not registered in DIC
-		if (($lsn = $builder->getByType($listener)) === NULL) {
+		if (($lsn = $builder->getByType($listener)) === null) {
 			throw new ServiceCreationException(sprintf("Listener service '%s' not found", $listener));
 		}
 
@@ -156,7 +154,7 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 		foreach ($events as $event => $interface) {
 			// Check implementation
 			$rf = new ClassType($listener);
-			if ($rf->implementsInterface($interface) === FALSE) {
+			if ($rf->implementsInterface($interface) === false) {
 				throw new ServiceCreationException(sprintf("Object '%s' should implement '%s'", $listener, $interface));
 			}
 
@@ -167,4 +165,5 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 			]);
 		}
 	}
+
 }

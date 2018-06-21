@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Tests\Fixtures\Mocks\InvalidFoo\Foo;
 
@@ -7,22 +7,21 @@ use Nextras\Orm\Mapper\Memory\ArrayMapper;
 final class InvalidFooMapper extends ArrayMapper
 {
 
-	/** @var mixed */
+	/** @var mixed[] */
 	private $_data;
 
 	/**
-	 * @return array
+	 * @return mixed[]
 	 */
-	protected function readData()
+	protected function readData(): array
 	{
 		return $this->_data;
 	}
 
 	/**
-	 * @param array $data
-	 * @return void
+	 * @param mixed[] $data
 	 */
-	protected function saveData(array $data)
+	protected function saveData(array $data): void
 	{
 		$this->_data = $data;
 	}

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Tests\Fixtures\Mocks\Foo\Foo;
 
@@ -8,29 +8,25 @@ use Nextras\Orm\Mapper\Memory\ArrayMapper;
 final class FooMapper extends ArrayMapper
 {
 
-	/** @var mixed */
-	private $_data;
+	/** @var mixed[]| */
+	private $_data = [];
 
-	/**
-	 * @param Cache $cache
-	 */
 	public function __construct(Cache $cache)
 	{
 	}
 
 	/**
-	 * @return array
+	 * @return mixed[]
 	 */
-	protected function readData()
+	protected function readData(): array
 	{
 		return $this->_data;
 	}
 
 	/**
-	 * @param array $data
-	 * @return void
+	 * @param mixed[] $data
 	 */
-	protected function saveData(array $data)
+	protected function saveData(array $data): void
 	{
 		$this->_data = $data;
 	}

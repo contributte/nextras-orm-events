@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Tests\Fixtures\Mocks\Foo;
 
@@ -8,96 +8,55 @@ use Nextras\Orm\Entity\IEntity;
 final class FooLifecycleListener implements LifecycleListener
 {
 
-	/** @var array */
+	/** @var callable[] */
 	public $onCall = [];
 
-	/** @var string */
+	/** @var string[] */
 	public $onCallHistory = [];
 
-	/**
-	 * @param IEntity $entity
-	 * @return void
-	 */
-	public function onAfterInsert(IEntity $entity)
+	public function onAfterInsert(IEntity $entity): void
 	{
 		$this->call(__METHOD__, $entity);
 	}
 
-	/**
-	 * @param IEntity $entity
-	 * @return void
-	 */
-	public function onAfterPersist(IEntity $entity)
+	public function onAfterPersist(IEntity $entity): void
 	{
 		$this->call(__METHOD__, $entity);
 	}
 
-	/**
-	 * @param IEntity $entity
-	 * @return void
-	 */
-	public function onAfterRemove(IEntity $entity)
+	public function onAfterRemove(IEntity $entity): void
 	{
 		$this->call(__METHOD__, $entity);
 	}
 
-	/**
-	 * @param IEntity $entity
-	 * @return void
-	 */
-	public function onAfterUpdate(IEntity $entity)
+	public function onAfterUpdate(IEntity $entity): void
 	{
 		$this->call(__METHOD__, $entity);
 	}
 
-	/**
-	 * @param IEntity $entity
-	 * @return void
-	 */
-	public function onBeforeInsert(IEntity $entity)
+	public function onBeforeInsert(IEntity $entity): void
 	{
 		$this->call(__METHOD__, $entity);
 	}
 
-	/**
-	 * @param IEntity $entity
-	 * @return void
-	 */
-	public function onBeforePersist(IEntity $entity)
+	public function onBeforePersist(IEntity $entity): void
 	{
 		$this->call(__METHOD__, $entity);
 	}
 
-	/**
-	 * @param IEntity $entity
-	 * @return void
-	 */
-	public function onBeforeRemove(IEntity $entity)
+	public function onBeforeRemove(IEntity $entity): void
 	{
 		$this->call(__METHOD__, $entity);
 	}
 
-	/**
-	 * @param IEntity $entity
-	 * @return void
-	 */
-	public function onBeforeUpdate(IEntity $entity)
+	public function onBeforeUpdate(IEntity $entity): void
 	{
 		$this->call(__METHOD__, $entity);
 	}
 
-	/**
-	 * HELPERS *****************************************************************
-	 */
-
-	/**
-	 * @param string $method
-	 * @param object $entity
-	 * @return void
-	 */
-	public function call($method, $entity)
+	public function call(string $method, IEntity $entity): void
 	{
-		$method = str_replace(__CLASS__ . '::', NULL, $method);
+		$method = str_replace(__CLASS__ . '::', null, $method);
 		foreach ($this->onCall as $cb) {
 			$cb($method, $entity);
 		}
