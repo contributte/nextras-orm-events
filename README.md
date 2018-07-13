@@ -57,7 +57,7 @@ composer require contributte/nextras-orm-events
         <a href="https://github.com/mabar">Marek Bartoš</a>
       </td>
     </tr>
-  <tbody>
+  </tbody>
 </table>
 
 -------
