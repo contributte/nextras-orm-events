@@ -16,7 +16,7 @@ final class FooListener implements BeforePersistListener
 
 	public function onBeforePersist(IEntity $entity): void
 	{
-		$method = str_replace(__CLASS__ . '::', null, __METHOD__);
+		$method = str_replace(self::class . '::', null, __METHOD__);
 		foreach ($this->onCall as $cb) {
 			$cb($method, $entity);
 		}

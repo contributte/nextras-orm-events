@@ -1,4 +1,13 @@
 includes:
-	- temp/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
+	- temp/phpstan/vendor/phpstan/phpstan-deprecation-rules/rules.neon
 	- temp/phpstan/vendor/phpstan/phpstan-nette/extension.neon
 	- temp/phpstan/vendor/phpstan/phpstan-nette/rules.neon
+	- temp/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
+
+parameters:
+	ignoreErrors:
+		# Multiple methods of casting to string are available, is it possible to check them all?
+		- '#^Cannot cast Nette\\Reflection\\IAnnotation to string\.$#'
+
+		# phpstan bug - https://github.com/phpstan/phpstan/issues/1482
+		- "#^Call to function method_exists\\(\\) with string and 'getEntityClassNames' will always evaluate to false\\.$#"
