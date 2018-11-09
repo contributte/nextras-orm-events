@@ -82,7 +82,7 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 		$repositories = $builder->findByType(IRepository::class);
 
 		foreach ($repositories as $repository) {
-			/** @var IRepository $repositoryClass */
+			/** @var string $repositoryClass */
 			$repositoryClass = $repository->getEntity();
 
 			// Skip invalid repositoryClass name
