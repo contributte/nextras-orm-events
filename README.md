@@ -24,12 +24,13 @@ Doctrine-like events for Nextras ORM entity lifecycle.
 
 ## Versions
 
-| State       | Version | Branch   | PHP      | |
-|-------------|---------|----------|----------|-|
-| development | `^0.5`  | `master` | `>= 7.1` ||
-| stable      | `^0.4`  | `master` | `>= 7.1` ||
-| stable      | `^0.3`  | `master` | `>= 5.6` ||
-| stable      | `^0.2`  | `master` | `>= 5.6` |(old namespace)|
+| State       | Version | Branch   | Nette | PHP     | |
+|-------------|---------|----------|-------|---------|-|
+| dev         | `^0.6`  | `master` | 3.0+  | `^7.2`  | |
+| stable      | `^0.5`  | `master` | 3.0+  | `^7.2`  | |
+| stable      | `^0.4`  | `master` | 2.4   | `>=7.1` | |
+| stable      | `^0.3`  | `master` | 2.4   | `>=5.6` | |
+| stable      | `^0.2`  | `master` | 2.4   | `>=5.6` | (old namespace)
 
 ## Maintainers
 

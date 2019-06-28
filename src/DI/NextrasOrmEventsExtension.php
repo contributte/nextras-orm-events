@@ -11,6 +11,7 @@ use Contributte\Nextras\Orm\Events\Listeners\BeforePersistListener;
 use Contributte\Nextras\Orm\Events\Listeners\BeforeRemoveListener;
 use Contributte\Nextras\Orm\Events\Listeners\BeforeUpdateListener;
 use Nette\DI\CompilerExtension;
+use Nette\DI\Definitions\ServiceDefinition;
 use Nette\DI\ServiceCreationException;
 use Nette\Reflection\ClassType;
 use Nette\Reflection\IAnnotation;
@@ -82,6 +83,8 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 		$repositories = $builder->findByType(IRepository::class);
 
 		foreach ($repositories as $repository) {
+			assert($repository instanceof ServiceDefinition);
+
 			/** @var string $repositoryClass */
 			$repositoryClass = $repository->getEntity();
 
@@ -107,6 +110,8 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 	 */
 	private function loadListeners(array $mapping): void
 	{
+		$builder = $this->getContainerBuilder();
+
 		foreach ($mapping as $entity => $repository) {
 			// Test invalid class name
 			if (!class_exists($entity)) {
@@ -117,7 +122,7 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 			$rf = new ClassType($entity);
 
 			// Add entity as dependency
-			$this->getContainerBuilder()->addDependency($rf->getFileName());
+			$builder->addDependency($rf);
 
 			// Try all annotations
 			foreach (self::$annotations as $annotation => $events) {
@@ -149,6 +154,7 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 
 		// Get definitions
 		$repositoryDef = $builder->getDefinition($rsn);
+		assert($repositoryDef instanceof ServiceDefinition);
 		$listenerDef = $builder->getDefinition($lsn);
 
 		foreach ($events as $event => $interface) {
