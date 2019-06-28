@@ -1,24 +1,58 @@
 # Nextras ORM Events
 
+Doctrine-like events for Nextras ORM entity lifecycle.
+
 ## Content
 
-- [Config](#config)
-- [Entity](#entity)
-- [Service](#service)
+- [Setup](#setup)
+- [Usage](#usage)
+  - [Listener](#listener)
+  - [Entity](#entity)
 - [Real example](#real-example)
 
-## Usage
+## Setup
 
-### Config
+Install package
+
+```bash
+composer require contributte/nextras-orm-events
+```
+
+RegisterExtension
 
 ```yaml
 extensions:
     orm.events: Contributte\Nextras\Orm\Events\DI\NextrasOrmEventsExtension
 ```
 
+## Usage
+
+### Listener
+
+Create listener
+
+```php
+namespace App\Model;
+
+use Contributte\Nextras\Orm\Events\Listeners\BeforePersistListener as BaseBeforePersistListener;
+use Nextras\Orm\Entity\IEntity;
+
+final class BeforePersistListener implements BaseBeforePersistListener
+{
+
+    public function onBeforePersist(IEntity $entity): void
+    {
+        // ...
+    }
+
+}
+```
+
+Register it
+
 ```yaml
 services:
-    - App\Model\BeforePersistListener
+    - App\Model\ExampleBeforePersistListener
 ```
 
 ### Entity
@@ -41,30 +75,9 @@ Just add annotation `@<Before/Update>` to your entity.
 class Foo extends Entity
 {
 }
-
 ```
 
-### Service
-
-```php
-
-namespace App\Model;
-
-use Contributte\Nextras\Orm\Events\Listeners\BeforePersistListener;
-use Nextras\Orm\Entity\IEntity;
-
-final class BeforePersistListener implements BeforePersistListener
-{
-
-    public function onBeforePersist(IEntity $entity): void
-    {
-        // ...
-    }
-
-}
-```
-
-### Real example
+## Real example
 
 ```yaml
 service:
