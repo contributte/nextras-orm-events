@@ -2,25 +2,25 @@
 
 Doctrine-like events for Nextras ORM entity lifecycle.
 
------
-
 [![Build Status](https://img.shields.io/travis/contributte/nextras-orm-events.svg?style=flat-square)](https://travis-ci.org/contributte/nextras-orm-events)
 [![Code coverage](https://img.shields.io/coveralls/contributte/nextras-orm-events.svg?style=flat-square)](https://coveralls.io/r/contributte/nextras-orm-events)
 [![Licence](https://img.shields.io/packagist/l/contributte/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-events)
 [![Downloads this Month](https://img.shields.io/packagist/dm/contributte/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-events)
 [![Downloads total](https://img.shields.io/packagist/dt/contributte/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-events)
 [![Latest stable](https://img.shields.io/packagist/v/contributte/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-events)
-[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
+[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
 
 ## Discussion / Help
 
 [![Join the chat](https://img.shields.io/gitter/room/contributte/contributte.svg?style=flat-square)](http://bit.ly/ctteg)
 
-## Install
+## Documentation
 
-```sh
-composer require contributte/nextras-orm-events
-```
+- [Setup](.docs/README.md#setup)
+- [Usage](.docs/README.md#usage)
+  - [Listener](.docs/README.md#listener)
+  - [Entity](.docs/README.md#entity)
+- [Real example](.docs/README.md#real-example)
 
 ## Versions
 
@@ -30,12 +30,6 @@ composer require contributte/nextras-orm-events
 | stable      | `^0.4`  | `master` | `>= 7.1` ||
 | stable      | `^0.3`  | `master` | `>= 5.6` ||
 | stable      | `^0.2`  | `master` | `>= 5.6` |(old namespace)|
-
-## Overview
-- [Config](https://github.com/contributte/nextras-orm-events/blob/master/.docs/README.md#config)
-- [Entity](https://github.com/contributte/nextras-orm-events/blob/master/.docs/README.md#entity)
-- [Service](https://github.com/contributte/nextras-orm-events/blob/master/.docs/README.md#service)
-- [Real example](https://github.com/contributte/nextras-orm-events/blob/master/.docs/README.md#real-example)
 
 ## Maintainers
 
@@ -59,7 +53,5 @@ composer require contributte/nextras-orm-events
     </tr>
   </tbody>
 </table>
-
--------
 
 Thank you for testing, reporting and contributing.
