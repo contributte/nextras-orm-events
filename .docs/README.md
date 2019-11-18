@@ -69,7 +69,8 @@ Just add annotation `@<Before/Update>` to your entity or to trait which entity u
  * @AfterPersist(App\Model\AfterPersistListener)
  * @AfterRemove(App\Model\AfterRemoveListener)
  * @AfterUpdate(App\Model\AfterUpdateListener)
-
+ * @Flush(App\Model\FlushListener)
+ *
  * @Lifecycle(App\Model\LifecycleListener)
  */
 class Foo extends Entity

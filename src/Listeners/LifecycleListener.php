@@ -10,7 +10,8 @@ interface LifecycleListener extends
 	AfterInsertListener,
 	AfterPersistListener,
 	AfterRemoveListener,
-	AfterUpdateListener
+	AfterUpdateListener,
+	FlushListener
 {
 
 }

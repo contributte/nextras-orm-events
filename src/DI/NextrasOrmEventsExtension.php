@@ -10,6 +10,7 @@ use Contributte\Nextras\Orm\Events\Listeners\BeforeInsertListener;
 use Contributte\Nextras\Orm\Events\Listeners\BeforePersistListener;
 use Contributte\Nextras\Orm\Events\Listeners\BeforeRemoveListener;
 use Contributte\Nextras\Orm\Events\Listeners\BeforeUpdateListener;
+use Contributte\Nextras\Orm\Events\Listeners\FlushListener;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\ServiceDefinition;
 use Nette\DI\ServiceCreationException;
@@ -31,6 +32,7 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 			'onAfterPersist' => AfterPersistListener::class,
 			'onAfterRemove' => AfterRemoveListener::class,
 			'onAfterUpdate' => AfterUpdateListener::class,
+			'onFlush' => FlushListener::class,
 		],
 		'BeforeInsert' => [
 			'onBeforeInsert' => BeforeInsertListener::class,
@@ -55,6 +57,9 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 		],
 		'AfterUpdate' => [
 			'onAfterUpdate' => AfterUpdateListener::class,
+		],
+		'Flush' => [
+			'onFlush' => FlushListener::class,
 		],
 	];
 
