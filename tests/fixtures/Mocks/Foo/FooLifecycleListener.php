@@ -54,6 +54,15 @@ final class FooLifecycleListener implements LifecycleListener
 		$this->call(__METHOD__, $entity);
 	}
 
+	/**
+	 * @param IEntity[] $persisted
+	 * @param IEntity[] $removed
+	 */
+	public function onFlush(array $persisted, array $removed): void
+	{
+		// Not implemented
+	}
+
 	public function call(string $method, IEntity $entity): void
 	{
 		$method = str_replace(self::class . '::', null, $method);
