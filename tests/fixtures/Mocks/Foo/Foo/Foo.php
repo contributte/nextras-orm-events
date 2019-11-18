@@ -13,4 +13,6 @@ use Nextras\Orm\Entity\Entity;
 final class Foo extends Entity
 {
 
+	use FooTrait;
+
 }

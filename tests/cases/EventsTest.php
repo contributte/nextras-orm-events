@@ -16,6 +16,7 @@ use Tests\Fixtures\Mocks\Foo\Foo\Foo;
 use Tests\Fixtures\Mocks\Foo\Foo\FooRepository;
 use Tests\Fixtures\Mocks\Foo\FooLifecycleListener;
 use Tests\Fixtures\Mocks\Foo\FooListener;
+use Tests\Fixtures\Mocks\Foo\FooTraitListener;
 use Tests\Fixtures\Mocks\Foo\Model;
 use Tests\Fixtures\Mocks\InvalidFoo\InvalidModel;
 
@@ -47,6 +48,7 @@ final class EventsTest extends TestCase
 				
 				- Tests\Fixtures\Mocks\Foo\FooListener 
 				- Tests\Fixtures\Mocks\Foo\FooLifecycleListener
+				- Tests\Fixtures\Mocks\Foo\FooTraitListener 
 		', 'neon'));
 
 			$callback($compiler);
@@ -68,6 +70,7 @@ final class EventsTest extends TestCase
 
 		Assert::falsey($container->isCreated($container->findByType(FooListener::class)[0]));
 		Assert::falsey($container->isCreated($container->findByType(FooLifecycleListener::class)[0]));
+		Assert::falsey($container->isCreated($container->findByType(FooTraitListener::class)[0]));
 
 		$entity = new Foo();
 		$entity->bar = 'foobar';
@@ -76,6 +79,7 @@ final class EventsTest extends TestCase
 
 		Assert::truthy($container->isCreated($container->findByType(FooListener::class)[0]));
 		Assert::truthy($container->isCreated($container->findByType(FooLifecycleListener::class)[0]));
+		Assert::truthy($container->isCreated($container->findByType(FooTraitListener::class)[0]));
 	}
 
 	public function testEventsHierarchy(): void
@@ -101,6 +105,10 @@ final class EventsTest extends TestCase
 
 		/** @var FooListener $listener */
 		$listener = $container->getByType(FooListener::class);
+		Assert::equal(['onBeforePersist'], $listener->onCallHistory);
+
+		/** @var FooTraitListener $listener */
+		$listener = $container->getByType(FooTraitListener::class);
 		Assert::equal(['onBeforePersist'], $listener->onCallHistory);
 	}
 

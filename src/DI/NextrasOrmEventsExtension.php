@@ -118,18 +118,22 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 				throw new ServiceCreationException(sprintf("Entity class '%s' not found", $entity));
 			}
 
-			// Parse annotations from phpDoc
-			$rf = new ClassType($entity);
+			$types = class_uses($entity) + [$entity];
 
-			// Add entity as dependency
-			$builder->addDependency($rf);
+			foreach ($types as $type) {
+				// Parse annotations from phpDoc
+				$rf = new ClassType($type);
 
-			// Try all annotations
-			foreach (self::$annotations as $annotation => $events) {
-				/** @var IAnnotation|null $listener */
-				$listener = $rf->getAnnotation($annotation);
-				if ($listener !== null) {
-					$this->loadListenerByAnnotation($events, $repository, (string) $listener);
+				// Add entity/trait as dependency
+				$builder->addDependency($rf);
+
+				// Try all annotations
+				foreach (self::$annotations as $annotation => $events) {
+					/** @var IAnnotation|null $listener */
+					$listener = $rf->getAnnotation($annotation);
+					if ($listener !== null) {
+						$this->loadListenerByAnnotation($events, $repository, (string) $listener);
+					}
 				}
 			}
 		}

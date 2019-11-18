@@ -57,7 +57,7 @@ services:
 
 ### Entity
 
-Just add annotation `@<Before/Update>` to your entity.
+Just add annotation `@<Before/Update>` to your entity or to trait which entity uses.
 
 ```php
 /**
