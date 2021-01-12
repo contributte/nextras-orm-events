@@ -3,5 +3,9 @@ parameters:
 		# Multiple methods of casting to string are available, is it possible to check them all?
 		- '#^Cannot cast Nette\\Reflection\\IAnnotation to string\.$#'
 
-		# phpstan bug - https://github.com/phpstan/phpstan/issues/1482
-		- "#^Call to function method_exists\\(\\) with string and 'getEntityClassNames' will always evaluate to false\\.$#"
+includes:
+    - vendor/phpstan/phpstan-nette/extension.neon
+    - vendor/phpstan/phpstan-nette/rules.neon
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon

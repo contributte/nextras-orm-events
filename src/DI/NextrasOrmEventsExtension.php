@@ -123,11 +123,15 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 				throw new ServiceCreationException(sprintf("Entity class '%s' not found", $entity));
 			}
 
-			$types = class_uses($entity) + [$entity];
+			$types = [$entity];
+			$uses = class_uses($entity);
+			if ($uses !== false) {
+				$types = $uses + [$entity];
+			}
 
 			foreach ($types as $type) {
 				// Parse annotations from phpDoc
-				$rf = new ClassType($type);
+				$rf = ClassType::from($type);
 
 				// Add entity/trait as dependency
 				$builder->addDependency($rf);
@@ -168,7 +172,7 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 
 		foreach ($events as $event => $interface) {
 			// Check implementation
-			$rf = new ClassType($listener);
+			$rf = ClassType::from($listener);
 			if ($rf->implementsInterface($interface) === false) {
 				throw new ServiceCreationException(sprintf("Object '%s' should implement '%s'", $listener, $interface));
 			}
