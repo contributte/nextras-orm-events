@@ -5,7 +5,7 @@ namespace Tests\Fixtures\Mocks\Foo\Foo;
 /**
  * @BeforePersist(Tests\Fixtures\Mocks\Foo\FooTraitListener)
  */
-trait FooTrait
+trait Bar
 {
 
 }

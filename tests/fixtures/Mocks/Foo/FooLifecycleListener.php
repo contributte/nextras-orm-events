@@ -65,10 +65,11 @@ final class FooLifecycleListener implements LifecycleListener
 
 	public function call(string $method, IEntity $entity): void
 	{
-		$method = str_replace(self::class . '::', null, $method);
+		$method = str_replace(self::class . '::', '', $method);
 		foreach ($this->onCall as $cb) {
 			$cb($method, $entity);
 		}
+
 		$this->onCallHistory[] = $method;
 	}
 

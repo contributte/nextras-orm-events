@@ -45,10 +45,10 @@ final class EventsTest extends TestCase
 			$compiler->loadConfig(FileMock::create('
 			services:
 				cache: Nette\Caching\Storages\DevNullStorage
-				
-				- Tests\Fixtures\Mocks\Foo\FooListener 
+
+				- Tests\Fixtures\Mocks\Foo\FooListener
 				- Tests\Fixtures\Mocks\Foo\FooLifecycleListener
-				- Tests\Fixtures\Mocks\Foo\FooTraitListener 
+				- Tests\Fixtures\Mocks\Foo\FooTraitListener
 		', 'neon'));
 
 			$callback($compiler);
@@ -126,7 +126,7 @@ final class EventsTest extends TestCase
 					$compiler->loadConfig(FileMock::create('
 					services:
 						cache: Nette\Caching\Storages\DevNullStorage
-						
+
 						- Tests\Fixtures\Mocks\InvalidFoo\BadListener
 				', 'neon'));
 				});
