@@ -1,58 +1,56 @@
-# Nextras ORM Events
+![](https://heatbadger.now.sh/github/readme/contributte/nextras-orm-events/)
 
-Doctrine-like events for Nextras ORM entity lifecycle.
+<p align=center>
+    <a href="https://github.com/contributte/nextras-orm-events/actions"><img src="https://badgen.net/github/checks/contributte/nextras-orm-events"></a>
+    <a href="https://coveralls.io/r/contributte/nextras-orm-events"><img src="https://badgen.net/coveralls/c/github/contributte/nextras-orm-events"></a>
+    <a href="https://packagist.org/packages/contributte/nextras-orm-events"><img src="https://badgen.net/packagist/dm/contributte/nextras-orm-events"></a>
+    <a href="https://packagist.org/packages/contributte/nextras-orm-events"><img src="https://badgen.net/packagist/v/contributte/nextras-orm-events"></a>
+</p>
+<p align=center>
+    <a href="https://packagist.org/packages/contributte/nextras-orm-events"><img src="https://badgen.net/packagist/php/contributte/nextras-orm-events"></a>
+    <a href="https://github.com/contributte/nextras-orm-events"><img src="https://badgen.net/github/license/contributte/nextras-orm-events"></a>
+    <a href="https://bit.ly/ctteg"><img src="https://badgen.net/badge/support/gitter/cyan"></a>
+    <a href="https://bit.ly/cttfo"><img src="https://badgen.net/badge/support/forum/yellow"></a>
+    <a href="https://contributte.org/partners.html"><img src="https://badgen.net/badge/sponsor/donations/F96854"></a>
+</p>
 
-[![Build Status](https://img.shields.io/travis/contributte/nextras-orm-events.svg?style=flat-square)](https://travis-ci.org/contributte/nextras-orm-events)
-[![Code coverage](https://img.shields.io/coveralls/contributte/nextras-orm-events.svg?style=flat-square)](https://coveralls.io/r/contributte/nextras-orm-events)
-[![Licence](https://img.shields.io/packagist/l/contributte/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-events)
-[![Downloads this Month](https://img.shields.io/packagist/dm/contributte/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-events)
-[![Downloads total](https://img.shields.io/packagist/dt/contributte/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-events)
-[![Latest stable](https://img.shields.io/packagist/v/contributte/nextras-orm-events.svg?style=flat-square)](https://packagist.org/packages/contributte/nextras-orm-events)
-[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
+<p align=center>
+    Website 🚀 <a href="https://contributte.org">contributte.org</a> | Contact 👨🏻‍💻 <a href="https://f3l1x.io">f3l1x.io</a> | Twitter 🐦 <a href="https://twitter.com/contributte">@contributte</a>
+</p>
 
-## Discussion / Help
+## Usage
 
-[![Join the chat](https://img.shields.io/gitter/room/contributte/contributte.svg?style=flat-square)](http://bit.ly/ctteg)
+To install latest version of `contributte/nextras-orm-events` use [Composer](https://getcomposer.com).
+
+```
+composer require contributte/nextras-orm-events
+```
 
 ## Documentation
 
-- [Setup](.docs/README.md#setup)
-- [Usage](.docs/README.md#usage)
-  - [Listener](.docs/README.md#listener)
-  - [Entity](.docs/README.md#entity)
-- [Real example](.docs/README.md#real-example)
+For details on how to use this package, check out our [documentation](.docs).
 
 ## Versions
 
-| State       | Version | Branch   | Nette | PHP     | |
-|-------------|---------|----------|-------|---------|-|
-| dev         | `^0.7`  | `master` | 3.0+  | `^7.2`  | |
-| stable      | `^0.6`  | `master` | 3.0+  | `^7.2`  | |
-| stable      | `^0.4`  | `master` | 2.4   | `>=7.1` | |
-| stable      | `^0.3`  | `master` | 2.4   | `>=5.6` | |
-| stable      | `^0.2`  | `master` | 2.4   | `>=5.6` | (old namespace)
+|  State   | Version    |  Branch      | Nette    |  PHP     |
+|----------|------------|--------------|----------|----------|
+|  dev     |  `^0.7`    |  `master`    |  `3.0+`  |  `>=7.2` |
+|  stable  |  `^0.6`    |  `master`    |  `3.0+`  |  `^7.2` |
+|  stable  |  `^0.4`    |  `master`    |  `2.4`   |  `>=7.1` |
+|  stable  |  `^0.3`    |  `master`    |  `2.4`   |  `>=5.6` |
 
-## Maintainers
+## Development
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/f3l1x">
-            <img width="150" height="150" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=150">
-        </a>
-        </br>
-        <a href="https://github.com/f3l1x">Milan Felix Šulc</a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/mabar">
-            <img width="150" height="150" src="https://avatars0.githubusercontent.com/u/20974277?s=150&v=4">
-        </a>
-        </br>
-        <a href="https://github.com/mabar">Marek Bartoš</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+See [how to contribute](https://contributte.org) to this package. This package is currently maintained by these authors.
 
-Thank you for testing, reporting and contributing.
+<a href="https://github.com/f3l1x">
+    <img width="80" height="80" src="https://avatars.githubusercontent.com/f3l1x">
+</a>
+<a href="https://github.com/mabar">
+    <img width="80" height="80" src="https://avatars.githubusercontent.com/mabar">
+</a>
+
+-----
+
+Consider to [support](https://contributte.org/partners) **contributte** development team.
+Also thank you for using this package.
