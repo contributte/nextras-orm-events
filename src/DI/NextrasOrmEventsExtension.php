@@ -14,8 +14,8 @@ use Contributte\Nextras\Orm\Events\Listeners\FlushListener;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\ServiceDefinition;
 use Nette\DI\ServiceCreationException;
+use Nette\Reflection\Annotation;
 use Nette\Reflection\ClassType;
-use Nette\Reflection\IAnnotation;
 use Nextras\Orm\Repository\IRepository;
 
 final class NextrasOrmEventsExtension extends CompilerExtension
@@ -138,7 +138,7 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 
 				// Try all annotations
 				foreach (self::$annotations as $annotation => $events) {
-					/** @var IAnnotation|null $listener */
+					/** @var Annotation|null $listener */
 					$listener = $rf->getAnnotation($annotation);
 					if ($listener !== null) {
 						$this->loadListenerByAnnotation($events, $repository, (string) $listener);
