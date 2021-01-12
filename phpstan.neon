@@ -1,11 +1,11 @@
-parameters:
-	ignoreErrors:
-		# Multiple methods of casting to string are available, is it possible to check them all?
-		- '#^Cannot cast Nette\\Reflection\\IAnnotation to string\.$#'
-
 includes:
     - vendor/phpstan/phpstan-nette/extension.neon
     - vendor/phpstan/phpstan-nette/rules.neon
     - vendor/phpstan/phpstan/conf/bleedingEdge.neon
     - vendor/phpstan/phpstan-deprecation-rules/rules.neon
     - vendor/phpstan/phpstan-strict-rules/rules.neon
+
+parameters:
+	ignoreErrors:
+		# Multiple methods of casting to string are available, is it possible to check them all?
+		- '#^Cannot cast Nette\\Reflection\\IAnnotation to string\.$#'
