@@ -20,10 +20,10 @@
 
 ## Usage
 
-To install latest version of `contributte/nextras-orm-events` use [Composer](https://getcomposer.com).
+To install latest version of `contributte/nextras-orm-events` use [Composer](https://getcomposer.org).
 
 ```
-composer require contributte/nextras-orm-events
+$ composer require contributte/nextras-orm-events
 ```
 
 ## Documentation
