@@ -6,8 +6,8 @@ Doctrine-like events for Nextras ORM entity lifecycle.
 
 - [Setup](#setup)
 - [Usage](#usage)
-  - [Listener](#listener)
-  - [Entity](#entity)
+	- [Listener](#listener)
+	- [Entity](#entity)
 - [Real example](#real-example)
 
 ## Setup
@@ -20,9 +20,9 @@ composer require contributte/nextras-orm-events
 
 RegisterExtension
 
-```yaml
+```neon
 extensions:
-    orm.events: Contributte\Nextras\Orm\Events\DI\NextrasOrmEventsExtension
+	orm.events: Contributte\Nextras\Orm\Events\DI\NextrasOrmEventsExtension
 ```
 
 ## Usage
@@ -40,19 +40,19 @@ use Nextras\Orm\Entity\IEntity;
 final class BeforePersistListener implements BaseBeforePersistListener
 {
 
-    public function onBeforePersist(IEntity $entity): void
-    {
-        // ...
-    }
+	public function onBeforePersist(IEntity $entity): void
+	{
+		// ...
+	}
 
 }
 ```
 
 Register it
 
-```yaml
+```neon
 services:
-    - App\Model\ExampleBeforePersistListener
+	- App\Model\ExampleBeforePersistListener
 ```
 
 ### Entity
@@ -80,9 +80,9 @@ class Foo extends Entity
 
 ## Real example
 
-```yaml
+```neon
 service:
-    - App\Model\FooBeforeInsertListener
+	- App\Model\FooBeforeInsertListener
 ```
 
 ```php
@@ -102,21 +102,21 @@ class Foo extends Entity
  */
 public function createServiceOrm__repositories__foo()
 {
-    $service = new FooRepository(
-        $this->getService('orm.mappers.foo'),
-        $this->getService('orm.dependencyProvider')
-    );
-    $service->setModel($this->getService('orm.model'));
+	$service = new FooRepository(
+		$this->getService('orm.mappers.foo'),
+		$this->getService('orm.dependencyProvider')
+	);
+	$service->setModel($this->getService('orm.model'));
 
-    // ===== attaching events (provided by extension =====
+	// ===== attaching events (provided by extension =====
 
-    $service->onBeforeInsert[] = [
-        $this->getService('App\Model\FooBeforeInsertListener'),
-        'onBeforeInsert',
-    ];
+	$service->onBeforeInsert[] = [
+		$this->getService('App\Model\FooBeforeInsertListener'),
+		'onBeforeInsert',
+	];
 
-    // ===== attaching events ============================
+	// ===== attaching events ============================
 
-    return $service;
+	return $service;
 }
 ```
