@@ -44,9 +44,6 @@ See [how to contribute](https://contributte.org) to this package. This package i
 <a href="https://github.com/f3l1x">
     <img width="80" height="80" src="https://avatars.githubusercontent.com/f3l1x">
 </a>
-<a href="https://github.com/mabar">
-    <img width="80" height="80" src="https://avatars.githubusercontent.com/mabar">
-</a>
 
 -----
 
