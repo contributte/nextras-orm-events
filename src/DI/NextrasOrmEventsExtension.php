@@ -14,9 +14,9 @@ use Contributte\Nextras\Orm\Events\Listeners\FlushListener;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\ServiceDefinition;
 use Nette\DI\ServiceCreationException;
-use Nette\Reflection\Annotation;
-use Nette\Reflection\ClassType;
 use Nextras\Orm\Repository\IRepository;
+use ReflectionClass;
+use ReflectionException;
 
 final class NextrasOrmEventsExtension extends CompilerExtension
 {
@@ -65,6 +65,7 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 
 	/**
 	 * Decorate services
+	 * @throws ReflectionException
 	 */
 	public function beforeCompile(): void
 	{
@@ -112,6 +113,7 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 
 	/**
 	 * @param string[] $mapping
+	 * @throws ReflectionException
 	 */
 	private function loadListeners(array $mapping): void
 	{
@@ -131,17 +133,25 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 
 			foreach ($types as $type) {
 				// Parse annotations from phpDoc
-				$rf = ClassType::from($type);
+				/** @phpstan-var class-string $type */
+				$rf = new ReflectionClass($type);
+				preg_match_all('/@(.*?)\n/s', (string)$rf->getDocComment(), $annotationRows);
+
+				$listeners = [];
+				foreach ($annotationRows[1] as $val) {
+					preg_match('/\((.*?)\)/', $val, $match);
+					if (isset($match[1])) {
+						$listeners[strtok($val, '(')] = $match[1];
+					}
+				}
 
 				// Add entity/trait as dependency
 				$builder->addDependency($rf);
 
 				// Try all annotations
 				foreach (self::$annotations as $annotation => $events) {
-					/** @var Annotation|null $listener */
-					$listener = $rf->getAnnotation($annotation);
-					if ($listener !== null) {
-						$this->loadListenerByAnnotation($events, $repository, (string) $listener);
+					if (isset($listeners[$annotation])) {
+						$this->loadListenerByAnnotation($events, $repository, $listeners[$annotation]);
 					}
 				}
 			}
@@ -150,6 +160,7 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 
 	/**
 	 * @param string[] $events
+	 * @throws ReflectionException
 	 */
 	private function loadListenerByAnnotation(array $events, string $repository, string $listener): void
 	{
@@ -172,7 +183,8 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 
 		foreach ($events as $event => $interface) {
 			// Check implementation
-			$rf = ClassType::from($listener);
+			/** @phpstan-var class-string $listener */
+			$rf = new ReflectionClass($listener);
 			if ($rf->implementsInterface($interface) === false) {
 				throw new ServiceCreationException(sprintf("Object '%s' should implement '%s'", $listener, $interface));
 			}
