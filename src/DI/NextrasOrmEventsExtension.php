@@ -11,12 +11,12 @@ use Contributte\Nextras\Orm\Events\Listeners\BeforePersistListener;
 use Contributte\Nextras\Orm\Events\Listeners\BeforeRemoveListener;
 use Contributte\Nextras\Orm\Events\Listeners\BeforeUpdateListener;
 use Contributte\Nextras\Orm\Events\Listeners\FlushListener;
+use Contributte\Utils\Annotations;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\ServiceDefinition;
 use Nette\DI\ServiceCreationException;
-use Nette\Reflection\Annotation;
-use Nette\Reflection\ClassType;
 use Nextras\Orm\Repository\IRepository;
+use ReflectionClass;
 
 final class NextrasOrmEventsExtension extends CompilerExtension
 {
@@ -129,19 +129,20 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 				$types = $uses + [$entity];
 			}
 
+			/** @var class-string $type */
 			foreach ($types as $type) {
 				// Parse annotations from phpDoc
-				$rf = ClassType::from($type);
+				$rf = new ReflectionClass($type);
 
 				// Add entity/trait as dependency
 				$builder->addDependency($rf);
 
 				// Try all annotations
 				foreach (self::$annotations as $annotation => $events) {
-					/** @var Annotation|null $listener */
-					$listener = $rf->getAnnotation($annotation);
+					/** @var class-string|null $listener */
+					$listener = Annotations::getAnnotation($rf, $annotation);
 					if ($listener !== null) {
-						$this->loadListenerByAnnotation($events, $repository, (string) $listener);
+						$this->loadListenerByAnnotation($events, $repository, $listener);
 					}
 				}
 			}
@@ -150,6 +151,7 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 
 	/**
 	 * @param string[] $events
+	 * @param class-string $listener
 	 */
 	private function loadListenerByAnnotation(array $events, string $repository, string $listener): void
 	{
@@ -170,9 +172,10 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 		assert($repositoryDef instanceof ServiceDefinition);
 		$listenerDef = $builder->getDefinition($lsn);
 
+		// Check implementation
+		$rf = new ReflectionClass($listener);
+
 		foreach ($events as $event => $interface) {
-			// Check implementation
-			$rf = ClassType::from($listener);
 			if ($rf->implementsInterface($interface) === false) {
 				throw new ServiceCreationException(sprintf("Object '%s' should implement '%s'", $listener, $interface));
 			}
