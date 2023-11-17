@@ -9,10 +9,10 @@ final class FooTraitListener implements BeforePersistListener
 {
 
 	/** @var callable[] */
-	public $onCall = [];
+	public array $onCall = [];
 
 	/** @var string[] */
-	public $onCallHistory = [];
+	public array $onCallHistory = [];
 
 	public function onBeforePersist(IEntity $entity): void
 	{

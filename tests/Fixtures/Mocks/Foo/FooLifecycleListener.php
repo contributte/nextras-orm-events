@@ -9,10 +9,10 @@ final class FooLifecycleListener implements LifecycleListener
 {
 
 	/** @var callable[] */
-	public $onCall = [];
+	public array $onCall = [];
 
 	/** @var string[] */
-	public $onCallHistory = [];
+	public array $onCallHistory = [];
 
 	public function onAfterInsert(IEntity $entity): void
 	{

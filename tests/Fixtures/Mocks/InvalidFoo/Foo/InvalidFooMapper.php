@@ -8,7 +8,7 @@ final class InvalidFooMapper extends ArrayMapper
 {
 
 	/** @var mixed[] */
-	private $_data;
+	private array $_data;
 
 	/**
 	 * @return mixed[]
