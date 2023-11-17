@@ -22,7 +22,7 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 {
 
 	/** @var string[][] */
-	private static $annotations = [
+	private static array $annotations = [
 		'Lifecycle' => [
 			'onBeforeInsert' => BeforeInsertListener::class,
 			'onBeforePersist' => BeforePersistListener::class,
@@ -99,7 +99,9 @@ final class NextrasOrmEventsExtension extends CompilerExtension
 			}
 
 			// Skip invalid subtype ob IRepository
-			if (!method_exists($repositoryClass, 'getEntityClassNames')) continue;
+			if (!method_exists($repositoryClass, 'getEntityClassNames'))
+
+			continue;
 
 			// Append mapping [repository => [entity1, entity2, entityN]
 			foreach ($repositoryClass::getEntityClassNames() as $entity) {
