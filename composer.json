@@ -18,7 +18,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.1",
     "contributte/utils": "^0.6 || ^0.7",
     "nette/di": "^3.1.8",
     "nextras/orm": "^4.0.7"
