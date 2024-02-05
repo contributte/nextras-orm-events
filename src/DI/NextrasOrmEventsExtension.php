@@ -11,7 +11,7 @@ use Contributte\Nextras\Orm\Events\Listeners\BeforePersistListener;
 use Contributte\Nextras\Orm\Events\Listeners\BeforeRemoveListener;
 use Contributte\Nextras\Orm\Events\Listeners\BeforeUpdateListener;
 use Contributte\Nextras\Orm\Events\Listeners\FlushListener;
-use Contributte\Utils\Annotations;
+use Contributte\Nextras\Orm\Events\Utils\Annotations;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\ServiceDefinition;
 use Nette\DI\ServiceCreationException;
