@@ -2,13 +2,22 @@
 
 namespace Tests\Fixtures\Mocks\InvalidFoo\Foo;
 
+use Nette\Caching\Cache;
 use Nextras\Orm\Mapper\Memory\ArrayMapper;
 
 final class InvalidFooMapper extends ArrayMapper
 {
 
 	/** @var mixed[] */
-	private array $_data;
+	private array $_data = [];
+
+	public function __construct(
+		Cache $cache,
+		mixed $mapperCoordinator = null,
+	)
+	{
+		// Required by DI but not used in memory mapper
+	}
 
 	/**
 	 * @return mixed[]
