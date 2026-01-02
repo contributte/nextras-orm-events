@@ -3,7 +3,7 @@ includes:
 
 parameters:
 	level: 9
-	phpVersion: 80100
+	phpVersion: 80200
 
 	scanDirectories:
 		- src
@@ -16,3 +16,6 @@ parameters:
 		- .docs
 
 	ignoreErrors:
+		- # Regex match result type inference limitation
+			message: '~Strict comparison using === between non-falsy-string and ~'
+			path: src/Utils/Annotations.php
