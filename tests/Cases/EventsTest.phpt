@@ -2,24 +2,22 @@
 
 namespace Tests\Cases;
 
-use Contributte\Nextras\Orm\Events\DI\NextrasOrmEventsExtension;
 use Contributte\Tester\Toolkit;
-use Contributte\Tester\Utils\ContainerBuilder;
 use Contributte\Tester\Utils\Neonkit;
 use Nette\DI\Compiler;
 use Nette\DI\ServiceCreationException;
-use Nextras\Orm\Bridges\NetteDI\OrmExtension;
 use Tester\Assert;
 use Tests\Fixtures\Mocks\Foo\Foo\Foo;
 use Tests\Fixtures\Mocks\Foo\Foo\FooRepository;
 use Tests\Fixtures\Mocks\Foo\FooLifecycleListener;
 use Tests\Fixtures\Mocks\Foo\FooListener;
 use Tests\Fixtures\Mocks\Foo\FooTraitListener;
+use Tests\Toolkit\ContainerFactory;
 
 require_once __DIR__ . '/../bootstrap.php';
 
 Toolkit::test(function (): void {
-	$container = createContainerBuilder()->build();
+	$container = ContainerFactory::create()->build();
 	$repository = $container->getByType(FooRepository::class);
 
 	Assert::falsey($container->isCreated($container->findByType(FooListener::class)[0]));
@@ -37,7 +35,7 @@ Toolkit::test(function (): void {
 });
 
 Toolkit::test(function (): void {
-	$container = createContainerBuilder()->build();
+	$container = ContainerFactory::create()->build();
 
 	/** @var FooRepository $repository */
 	$repository = $container->getByType(FooRepository::class);
@@ -68,7 +66,7 @@ Toolkit::test(function (): void {
 Toolkit::test(function (): void {
 	Assert::throws(
 		function (): void {
-			createContainerBuilder()
+			ContainerFactory::create()
 				->withCompiler(function (Compiler $compiler): void {
 					$compiler->addConfig(Neonkit::load(<<<'NEON'
 						orm:
@@ -87,26 +85,3 @@ Toolkit::test(function (): void {
 		"Object 'Tests\Fixtures\Mocks\InvalidFoo\BadListener' should implement 'Contributte\Nextras\Orm\Events\Listeners\BeforePersistListener'"
 	);
 });
-
-function createContainerBuilder(): ContainerBuilder
-{
-	return ContainerBuilder::of()
-		->withCompiler(function (Compiler $compiler): void {
-			$compiler->addExtension('orm', new OrmExtension());
-			$compiler->addExtension('orm.events', new NextrasOrmEventsExtension());
-
-			$compiler->addConfig(Neonkit::load(<<<'NEON'
-				orm:
-					model: Tests\Fixtures\Mocks\Foo\Model
-
-				services:
-					cache: Nette\Caching\Storages\DevNullStorage
-					orm.mapperCoordinator: stdClass
-
-					- Tests\Fixtures\Mocks\Foo\FooListener
-					- Tests\Fixtures\Mocks\Foo\FooLifecycleListener
-					- Tests\Fixtures\Mocks\Foo\FooTraitListener
-			NEON
-			));
-		});
-}
