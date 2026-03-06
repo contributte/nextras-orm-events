@@ -2,7 +2,7 @@
 
 <p align=center>
     <a href="https://github.com/contributte/nextras-orm-events/actions"><img src="https://badgen.net/github/checks/contributte/nextras-orm-events"></a>
-    <a href="https://coveralls.io/r/contributte/nextras-orm-events"><img src="https://badgen.net/coveralls/c/github/contributte/nextras-orm-events"></a>
+    <a href="https://codecov.io/gh/contributte/nextras-orm-events"><img src="https://badgen.net/codecov/c/github/contributte/nextras-orm-events"></a>
     <a href="https://packagist.org/packages/contributte/nextras-orm-events"><img src="https://badgen.net/packagist/dm/contributte/nextras-orm-events"></a>
     <a href="https://packagist.org/packages/contributte/nextras-orm-events"><img src="https://badgen.net/packagist/v/contributte/nextras-orm-events"></a>
 </p>
