@@ -18,17 +18,7 @@
     Website 🚀 <a href="https://contributte.org">contributte.org</a> | Contact 👨🏻‍💻 <a href="https://f3l1x.io">f3l1x.io</a> | Twitter 🐦 <a href="https://twitter.com/contributte">@contributte</a>
 </p>
 
-## Usage
-
-To install latest version of `contributte/nextras-orm-events` use [Composer](https://getcomposer.org).
-
-```bash
-composer require contributte/nextras-orm-events
-```
-
-## Documentation
-
-For details on how to use this package, check out our [documentation](.docs).
+Doctrine-like events for Nextras ORM entity lifecycle hooks.
 
 ## Versions
 
@@ -36,6 +26,117 @@ For details on how to use this package, check out our [documentation](.docs).
 |----------|---------|--------------|--------|---------|
 |  dev     | `^0.10` |  `master`    | `3.4+` | `>=8.1` |
 |  stable  | `^0.9`  |  `master`    | `3.1+` | `>=8.1` |
+
+## Installation
+
+To install latest version of `contributte/nextras-orm-events` use [Composer](https://getcomposer.org).
+
+```bash
+composer require contributte/nextras-orm-events
+```
+
+Register extension in your configuration.
+
+```neon
+extensions:
+    orm.events: Contributte\Nextras\Orm\Events\DI\NextrasOrmEventsExtension
+```
+
+## Usage
+
+### Listener
+
+Create listener.
+
+```php
+namespace App\Model;
+
+use Contributte\Nextras\Orm\Events\Listeners\BeforePersistListener as BaseBeforePersistListener;
+use Nextras\Orm\Entity\IEntity;
+
+final class BeforePersistListener implements BaseBeforePersistListener
+{
+
+    public function onBeforePersist(IEntity $entity): void
+    {
+        // ...
+    }
+
+}
+```
+
+Register it.
+
+```neon
+services:
+    - App\Model\ExampleBeforePersistListener
+```
+
+### Entity
+
+Add lifecycle annotations to your entity or to a trait used by your entity.
+
+```php
+/**
+ * @BeforeInsert(App\Model\BeforeInsertListener)
+ * @BeforePersist(App\Model\BeforePersistListener)
+ * @BeforeRemove(App\Model\BeforeRemoveListener)
+ * @BeforeUpdate(App\Model\BeforeUpdateListener)
+ * @AfterInsert(App\Model\AfterInsertListener)
+ * @AfterPersist(App\Model\AfterPersistListener)
+ * @AfterRemove(App\Model\AfterRemoveListener)
+ * @AfterUpdate(App\Model\AfterUpdateListener)
+ * @Flush(App\Model\FlushListener)
+ *
+ * @Lifecycle(App\Model\LifecycleListener)
+ */
+class Foo extends Entity
+{
+}
+```
+
+## Real Example
+
+```neon
+services:
+    - App\Model\FooBeforeInsertListener
+```
+
+```php
+/**
+ * @BeforeInsert(App\Model\FooBeforeInsertListener)
+ */
+class Foo extends Entity
+{
+}
+```
+
+```php
+// Generated container..
+
+/**
+ * @return FooRepository
+ */
+public function createServiceOrm__repositories__foo()
+{
+    $service = new FooRepository(
+        $this->getService('orm.mappers.foo'),
+        $this->getService('orm.dependencyProvider')
+    );
+    $service->setModel($this->getService('orm.model'));
+
+    // ===== attaching events (provided by extension) =====
+
+    $service->onBeforeInsert[] = [
+        $this->getService('App\Model\FooBeforeInsertListener'),
+        'onBeforeInsert',
+    ];
+
+    // ===== attaching events =============================
+
+    return $service;
+}
+```
 
 ## Development
 
